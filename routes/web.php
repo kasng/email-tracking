@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('voyager.dashboard');
 });
 
+Route::get('/test', [\App\Http\Controllers\OpenMailController::class, 'test']);
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+// SES Tracking
+Route::get('/beacon/{beaconIdentifier}', [\App\Http\Controllers\OpenMailController::class, 'open']);
