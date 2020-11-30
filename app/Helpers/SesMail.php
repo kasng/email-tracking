@@ -2,9 +2,9 @@
 
 namespace App\Helpers;
 
-use Illuminate\Support\Testing\Fakes\MailFake;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Container\Container;
+use App\Helpers\SesMailFake;
 
 /**
  * @see \Illuminate\Mail\Mailer

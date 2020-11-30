@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Services\Stats;
 use Illuminate\Mail\Mailer;
 use Carbon\Carbon;
 

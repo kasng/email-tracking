@@ -13,6 +13,7 @@ class OpenMailController extends Controller
     {
         print_r("<pre>");
         var_dump(config('app.url'));
+
     }
 
     public function open(Request $request, $beaconIdentifier)

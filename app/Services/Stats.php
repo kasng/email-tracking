@@ -21,13 +21,13 @@ class Stats
                 'bounces' => SesEmailBounce::whereEmail($email)->whereNotNull('bounced_at')->count(),
                 'complaints' => SesEmailComplaint::whereEmail($email)->whereNotNull('complained_at')->count(),
                 'click_throughs' => SesEmailLink::join(
-                    'laravel_ses_sent_emails',
-                    'laravel_ses_sent_emails.id',
-                    'laravel_ses_email_links.sent_email_id'
+                    'ses_sent_emails',
+                    'ses_sent_emails.id',
+                    'ses_email_links.sent_email_id'
                 )
-                    ->where('laravel_ses_sent_emails.email', '=', $email)
+                    ->where('ses_sent_emails.email', '=', $email)
                     ->whereClicked(true)
-                    ->count(\DB::raw('DISTINCT(laravel_ses_sent_emails.id)')) // if a user clicks two different links on one campaign, only one is counted
+                    ->count(\DB::raw('DISTINCT(ses_sent_emails.id)')) // if a user clicks two different links on one campaign, only one is counted
             ],
             'data' => [
                 'sent_emails' => SesSentEmail::whereEmail($email)->get(),
@@ -36,11 +36,11 @@ class Stats
                 'bounces' => SesEmailComplaint::whereEmail($email)->whereNotNull('bounced_at')->get(),
                 'complaints' => SesEmailComplaint::whereEmail($email)->whereNotNull('complained_at')->get(),
                 'click_throughs' => SesEmailLink::join(
-                    'laravel_ses_sent_emails',
-                    'laravel_ses_sent_emails.id',
-                    'laravel_ses_email_links.sent_email_id'
+                    'ses_sent_emails',
+                    'ses_sent_emails.id',
+                    'ses_email_links.sent_email_id'
                 )
-                    ->where('laravel_ses_sent_emails.email', '=', $email)
+                    ->where('ses_sent_emails.email', '=', $email)
                     ->whereClicked(true)
                     ->get()
             ]
